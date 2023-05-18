@@ -1,0 +1,1 @@
+# Template for VSCode workspace settings

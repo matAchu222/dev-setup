@@ -1,0 +1,1 @@
+# List of template stages to call from main pipelines
