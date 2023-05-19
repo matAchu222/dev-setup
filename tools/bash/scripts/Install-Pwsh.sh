@@ -24,39 +24,61 @@ if [ ! "$(uname -r)" ]; then
 fi
 echo "This script is run within Ubuntu"
 
-# Check if PowerShell Core is already installed
-if [ -x "$(command -v pwsh)" ]; then
-    echo "PowerShell Core is already installed"
-    exit 0
-fi
-echo "PowerShell Core is not installed"
-
 GithubOwner="PowerShell"
 GithubRepo="PowerShell"
 GithubUrl="https://api.github.com/repos/$GithubOwner/$GithubRepo/releases"
 
 # Query Github API for PowerShell Core releases
 GithubReleases=$(curl -s $GithubUrl | grep tag_name | cut -d '"' -f 4)
+# Sort the releases by version number in descending order
+GithubReleases=$(echo "$GithubReleases" | sort -rV)
+# Get the hightes version number which is not a preview version and save it in a variable LatestVersion
+LatestVersion=$(echo "$GithubReleases" | grep -v "preview" | head -n 1)
 
-# Save this in a variable GithubReleases and use it to present the user with a list of available PowerShell Core versions
-echo "Available PowerShell Core versions:"
-for Release in $GithubReleases; do
-    echo $Release
-done
-
-# Present user with choice of PowerShell Core versions
-while true; do
-    read -p "Please select a PowerShell Core version: " Version
-    if [[ $GithubReleases =~ (^|[[:space:]])"$Version"($|[[:space:]]) ]]; then
-        echo "You selected $Version"
-        break
-    else
-        echo "Invalid version. Please select a valid version."
+# Check if PowerShell Core is already installed
+if [ -x "$(command -v pwsh)" ]; then
+    CurrentPwshVersion=$(pwsh --version)
+    echo "PowerShell Core is already installed in Version '($CurrentPwshVersion)'"
+    echo "Latest version is '($LatestVersion)'"
+    CleanedCurrentPwshVersion=$(echo "$CurrentPwshVersion" | tr -dc '0-9.')
+    CleanedLatestVersion=$(echo "$LatestVersion" | tr -dc '0-9.')
+    if [ "$CleanedCurrentPwshVersion" == "$CleanedLatestVersion" ]; then
+        echo "PowerShell Core is already installed in the latest version"
+        exit 0
     fi
-done
+    # If newer version available ask user if he wants to update PowerShell Core
+    while true; do
+        read -p "Do you want to update PowerShell Core? (y/n) " yn
+        case $yn in
+            [Yy]* ) break;;
+            [Nn]* ) exit 0;;
+            * ) echo "Please answer yes or no.";;
+        esac
+        VersionToInstall=$LatestVersion
+    done
+fi
+
+if [ ! $VersionToInstall ]; then
+    # Present the user with a list of available PowerShell Core versions
+    echo "Available PowerShell Core versions:"
+    for Release in $GithubReleases; do
+        echo $Release
+    done
+
+    # Present user with choice of PowerShell Core versions
+    while true; do
+        read -p "Please select a PowerShell Core version: " Version
+        if [[ $GithubReleases =~ (^|[[:space:]])"$VersionToInstall"($|[[:space:]]) ]]; then
+            echo "You selected $VersionToInstall"
+            break
+        else
+            echo "Invalid version. Please select a valid version."
+        fi
+    done
+fi
 
 # Get the download URL for the selected PowerShell Core version
-DownloadUrl=$(curl -s $GithubUrl | grep -A 10 $Version | grep "browser_download_url" | grep "deb_amd64.deb" | cut -d '"' -f 4)
+DownloadUrl=$(curl -s $GithubUrl | grep -A 10 $VersionToInstall | grep "browser_download_url" | grep "deb_amd64.deb" | cut -d '"' -f 4)
 # Download the selected PowerShell Core version to the current directory
 DownloadedFile=$(basename $DownloadUrl)
 echo "Downloading $DownloadedFile"
