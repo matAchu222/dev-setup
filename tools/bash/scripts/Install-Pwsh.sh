@@ -68,4 +68,11 @@ sudo dpkg -i $DownloadedFile
 # Resolve missing dependencies and finish the install (if necessary)
 sudo apt-get install -f
 
+# Check if PowerShell Core is installed
+if [ ! "$(command -v pwsh)" ]; then
+    echo "PowerShell Core failed to install"
+    exit 1
+fi
+echo "PowerShell Core is installed"
+
 echo "Done!"
