@@ -1,22 +1,11 @@
 # Backlog
 
-## Open features
+## TODO: Update mechanics for software + settings files
 
-### TODO: Initialize project folder + file structure
-
-### TODO: Update mechanics for project + settings files
-
-### TODO: Mechanism to add things to user personal PATH variable
+## TODO: Mechanism to add things to user personal PATH variable
 So that programs can be run from cmd
 
-### TODO: Create references to best practices docu
-e.g. documentation sites, example repos, etc.
-For patterns, templates, etc.
-
-### TODO: Template folder with various templates
-e.g. for various languages like PowerShell Scripts + Modules, Terraform, Biceps, Arm, Azure DevOps Pipelines, GitHub Actions / Workflows, etc.
-
-### TODO: Software to integrate
+## TODO: Software to integrate
 - VSCode
   - VSCode Setup / Profiles
 - PowerShell Core
@@ -49,14 +38,18 @@ e.g. for various languages like PowerShell Scripts + Modules, Terraform, Biceps,
     - Security Checks
 - Oh-my-posh
 - Nerd Fonts
+- ZoomIt
+- Postman / Newman
 
-### TODO: Useable within Bash
+## TODO: Useable within Bash / Ubtuntu
 
-### TODO: Useable within Windows
+## TODO: Useable within Windows / PowerShell Core
 
-### TODO: Signing Scripts / Files / Project and check during usage
+## TODO: Create references to best practices docu
+e.g. documentation sites, example repos, etc.
+For patterns, templates, etc.
 
+## TODO: Template folder with various templates
+e.g. for various languages like PowerShell Scripts + Modules, Terraform, Biceps, Arm, Azure DevOps Pipelines, GitHub Actions / Workflows, etc.
 
-## Ideas
-
-
+## TODO: Signing Scripts / Files / Project and check during usage
