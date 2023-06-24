@@ -1,1 +1,0 @@
-# Here are the main pipelines which are called from Azure DevOps

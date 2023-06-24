@@ -1,1 +1,0 @@
-# Contains a template for Terraform IaC code

@@ -1,1 +1,0 @@
-# List of template jobs to call from main pipelines
