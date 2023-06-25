@@ -51,7 +51,7 @@ BEGIN {
         }
         $modulePathToInstallIn = $standardModulePaths[0]
 
-        $pathOfModulesToInstall = "$PSScriptRoot\..\modules"
+        $pathOfModulesToInstall = "$PSScriptRoot\..\..\modules"
 
         #endregion Set Variables
 
@@ -115,8 +115,8 @@ PROCESS {
                 Rename-Item -Path $profilePath -NewName $profilePathBackup -Force
                 Write-Host "Current profile was backed up to '$profilePathBackup'"
             }
-            Copy-Item -Path "$PSScriptRoot\..\templates\profile\Profile.ps1" -Destination $profilePath -Force
-            Copy-Item -Path "$PSScriptRoot\..\templates\profile\ProfileConfig.json" -Destination "$profilePathFolder\ProfileConfig.json" -Force
+            Copy-Item -Path "$PSScriptRoot\..\..\templates\profile\Profile.ps1" -Destination $profilePath -Force
+            Copy-Item -Path "$PSScriptRoot\..\..\templates\profile\ProfileConfig.json" -Destination "$profilePathFolder\ProfileConfig.json" -Force
             Write-Host "Old profile was replaced with new profile" -ForegroundColor Green
         }
         else {

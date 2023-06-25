@@ -38,6 +38,7 @@ So that programs can be run from cmd
     - Security Checks
 - Oh-my-posh
 - Nerd Fonts
+  - https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip
 - ZoomIt
 - Postman / Newman
 
