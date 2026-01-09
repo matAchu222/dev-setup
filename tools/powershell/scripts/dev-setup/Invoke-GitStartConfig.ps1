@@ -12,7 +12,7 @@ The FullName of the user.
 The email of the user.
 
 .EXAMPLE
-Invoke-GitStartConfig -FullName "Matthias Pfeiffer" Email "matthias.pfeiffer@accenture.com"
+Invoke-GitStartConfig -FullName "Matthias Pfeiffer" Email "matthias.pfeiffer@matachu.com"
 Describe one example
 
 .NOTES
